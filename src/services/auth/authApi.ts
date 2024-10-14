@@ -1,24 +1,30 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import { registerUserApi, loginUserApi, updateUserApi, getUserApi, TRegisterData } from "../../utils/burger-api";
-import { setCookie } from "src/utils/cookie";
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import {
+  registerUserApi,
+  loginUserApi,
+  updateUserApi,
+  getUserApi,
+  TRegisterData
+} from '../../utils/burger-api';
+import { setCookie } from 'src/utils/cookie';
 
 export const register = createAsyncThunk(
-    'user/register',
-    ({ email, name, password }: TRegisterData) =>
-      registerUserApi({ email, name, password }).then((res) => {
-        setCookie('accessToken', res.accessToken);
-        localStorage.setItem('refreshToken', res.refreshToken);
-        return res.user;
-      })
-  );
+  'user/register',
+  ({ email, name, password }: TRegisterData) =>
+    registerUserApi({ email, name, password }).then((res) => {
+      setCookie('accessToken', res.accessToken);
+      localStorage.setItem('refreshToken', res.refreshToken);
+      return res.user;
+    })
+);
 
 export const login = createAsyncThunk(
-    'user/login',
-    ({ email, password }: Omit<TRegisterData, 'name'>) =>
-        loginUserApi({ email, password }).then((res) => {
-            setCookie('accessToken', res.accessToken);
-            localStorage.setItem('refreshToken', res.refreshToken);
-            return res.user;
+  'user/login',
+  ({ email, password }: Omit<TRegisterData, 'name'>) =>
+    loginUserApi({ email, password }).then((res) => {
+      setCookie('accessToken', res.accessToken);
+      localStorage.setItem('refreshToken', res.refreshToken);
+      return res.user;
     })
 );
 

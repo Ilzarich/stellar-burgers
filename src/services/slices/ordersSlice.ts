@@ -1,30 +1,30 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { TOrder } from "@utils-types";
-import { getOrdersApi } from "@api";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { TOrder } from '@utils-types';
+import { getOrdersApi } from '@api';
 
 export const getOrders = createAsyncThunk('orders/userOrders', getOrdersApi);
 
 type TOrders = {
-    orders: TOrder[];
+  orders: TOrder[];
 };
 
-export const initialState: TOrders = { 
-    orders: [],
+export const initialState: TOrders = {
+  orders: []
 };
 
-const orderSlice = createSlice ({
-    name: 'orders', 
-    initialState,
-    reducers: {},
-    selectors: {},
-    extraReducers: (builder) => {
-        builder
-            .addCase(getOrders.pending, (state) => {})
-            .addCase(getOrders.rejected, (state, action) => {})
-            .addCase(getOrders.fulfilled, (state, action) => {
-                state.orders = action.payload;
-            })
-    }
-})
+const orderSlice = createSlice({
+  name: 'orders',
+  initialState,
+  reducers: {},
+  selectors: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(getOrders.pending, (state) => {})
+      .addCase(getOrders.rejected, (state, action) => {})
+      .addCase(getOrders.fulfilled, (state, action) => {
+        state.orders = action.payload;
+      });
+  }
+});
 
-export default orderSlice.reducer
+export default orderSlice.reducer;

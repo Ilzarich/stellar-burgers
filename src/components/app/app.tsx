@@ -1,4 +1,14 @@
-import { ConstructorPage, Feed, ForgotPassword, Login, NotFound404, Profile, ProfileOrders, Register, ResetPassword } from '@pages';
+import {
+  ConstructorPage,
+  Feed,
+  ForgotPassword,
+  Login,
+  NotFound404,
+  Profile,
+  ProfileOrders,
+  Register,
+  ResetPassword
+} from '@pages';
 import '../../index.css';
 import styles from './app.module.css';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
@@ -15,7 +25,11 @@ const App = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const checkUrlIngridients = location.pathname.split('/').length > 2 && location.pathname.includes('ingradients') ? true : false;
+  const checkUrlIngridients =
+    location.pathname.split('/').length > 2 &&
+    location.pathname.includes('ingradients')
+      ? true
+      : false;
 
   const backgroundLocation = location.state?.background;
 
