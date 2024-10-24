@@ -10,12 +10,12 @@ export const checkUserAuth = createAsyncThunk(
     if (getCookie('accessToken')) {
       dispatch(getUser()).finally(() => {
         dispatch(() => {
-          //initialState.isAuthCheked = true
+          initialState.isAuthChecked = true; // Исправлено
         });
       });
     } else {
       dispatch(() => {
-        //initialState.isAuthCheked = false
+        initialState.isAuthChecked = false; // Исправлено
       });
     }
   }
