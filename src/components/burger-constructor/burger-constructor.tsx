@@ -1,24 +1,61 @@
 import { FC, useMemo } from 'react';
 import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
+import { useSelector } from 'react-redux';
+import {
+  clearConstructor,
+  selectorBun,
+  selectorIngredients
+} from '../../services/constructorSlice';
+import { selectorUser } from '../../services/userSlice';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from '../../services/store';
+import { RootState } from '../../services/store';
+import { fetchOrderRequest, resetOrderModal } from '../../services/orderSlice';
 
 export const BurgerConstructor: FC = () => {
   /** TODO: взять переменные constructorItems, orderRequest и orderModalData из стора */
+
+  const buns = useSelector(selectorBun);
+  const ingredients = useSelector(selectorIngredients);
+  const user = useSelector(selectorUser);
+  const navigate = useNavigate();
   const constructorItems = {
-    bun: {
-      price: 0
-    },
-    ingredients: []
+    bun: buns,
+    ingredients: ingredients || []
   };
 
-  const orderRequest = false;
+  const orderRequest = useSelector(
+    (state: RootState) => state.orderSlise.isLoading
+  );
+  const orderModalData = useSelector(
+    (state: RootState) => state.orderSlise.order
+  );
+  const dispatch = useDispatch();
 
-  const orderModalData = null;
+  const getIngredientsIds = () => {
+    const bunId = constructorItems.bun ? constructorItems.bun._id : '';
+    const ingredientsIds = constructorItems.ingredients.map(
+      (ingredient) => ingredient._id
+    );
+
+    return [bunId, ...ingredientsIds];
+  };
 
   const onOrderClick = () => {
     if (!constructorItems.bun || orderRequest) return;
+    if (!user) {
+      navigate('/login');
+      return;
+    }
+
+    const ingredientIds = getIngredientsIds();
+    dispatch(fetchOrderRequest(ingredientIds));
+    dispatch(clearConstructor());
   };
-  const closeOrderModal = () => {};
+  const closeOrderModal = () => {
+    dispatch(resetOrderModal());
+  };
 
   const price = useMemo(
     () =>
@@ -30,7 +67,7 @@ export const BurgerConstructor: FC = () => {
     [constructorItems]
   );
 
-  return null;
+  // return null;
 
   return (
     <BurgerConstructorUI
