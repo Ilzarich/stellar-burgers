@@ -35,4 +35,35 @@ describe('E2E тесты для страницы конструктора', () =
       burgerConstructor.bunbutton.contains('Краторная булка N-200i (низ)');
     });
   });
+
+  describe("Тестирование работы модального окна для ингредиентов", () => {
+    it("Открытие модального окна", () => {
+      cy.get(bun).first().click();
+
+      const modal = cy.get('#modals > div:first-child');
+      const header = modal.get('div:first-child > h3');
+
+      header.contains('Краторная булка N-200i')
+    }); 
+
+    it("Закрытие модального окна при нажатии на крестик", () => {
+      cy.get(bun).first().click();
+
+      const modal = cy.get('#modals > div:first-child').as ('modal');
+      const button = modal.get('div:first-child > button > svg').click();
+
+      cy.get('modal').should('not.exist');
+    });
+
+    it("Закрытие модального окна при клике на оверлей", () => {
+      cy.get(bun).first().click();
+
+      const modal = cy.get("#modals > div:first-child").as ("modal");
+      const overlay = modal.get("#modals > div:nth-child(2)")
+
+      overlay.click({force: true});
+
+      cy.get("modal").should("not.exist");
+    })
+  })
 });
