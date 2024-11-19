@@ -7,7 +7,7 @@ import constructorSlice, {
   moveIngredient
 } from './constructorSlice';
 import { TConstructorIngredient } from '@utils-types';
-import { feedsSlice } from '../feedSlice';
+import { feedsSlice } from '../feed/feedSlice';
 import { cloneElement } from 'react';
 
 describe('Тесты ConstructorSlice', () => {
