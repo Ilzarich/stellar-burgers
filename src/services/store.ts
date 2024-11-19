@@ -4,7 +4,7 @@ import ingredientsReducer from './ingredients/ingredientsSlice';
 import constructorReducer from './constructor/constructorSlice';
 import orderSlise from './order/orderSlice';
 import userSlice from './user/userSlice';
-import feedsSlice from './feedSlice';
+import feedsSlice from './feed/feedSlice';
 
 import {
   TypedUseSelectorHook,
