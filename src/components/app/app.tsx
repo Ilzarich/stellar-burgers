@@ -16,8 +16,8 @@ import { AppHeader, IngredientDetails, Modal, OrderInfo } from '@components';
 
 import { useEffect } from 'react';
 
-import { fetchAllIngredients } from '../../services/ingredientsSlice';
-import { checkUserAuth } from '../../services/userSlice';
+import { fetchAllIngredients } from '../../services/ingredients/ingredientsSlice';
+import { checkUserAuth } from '../../services/user/userSlice';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { ProtectedRoute } from '../protected-route/protected-route';

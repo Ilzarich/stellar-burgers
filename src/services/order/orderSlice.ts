@@ -6,7 +6,7 @@ import {
 } from '@reduxjs/toolkit';
 import { TOrder } from '@utils-types';
 import { TNewOrderResponse } from '@api';
-import { RootState } from './store';
+import { RootState } from '../store';
 
 interface IOrderSliceState {
   success: boolean;
@@ -68,7 +68,7 @@ export const fetchOrdersProfile = createAsyncThunk(
       return response;
     } catch (error) {
       console.log('Ошибка при получении заказов', error);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue('Order not found');
     }
   }
 );
@@ -98,8 +98,11 @@ const orderSlice = createSlice({
 
       .addCase(fetchOrderDetails.rejected, (state, action) => {
         (state.isLoading = false),
-          (state.success = true),
-          (state.error = action.payload as string);
+          (state.success = false),
+          (state.error =
+            action.payload && typeof action.payload === 'string'
+              ? action.payload
+              : action.error?.message || 'Unknown error');
       })
 
       .addCase(fetchOrderRequest.pending, (state) => {

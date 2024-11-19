@@ -5,7 +5,7 @@ import { FC, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { fetchFeeds, selectorAllOrders } from '../../services/feedSlice';
 import { useDispatch } from '../../services/store';
-import { selectorIsLoading } from '../../services/userSlice';
+import { selectorIsLoading } from '../../services/user/userSlice';
 
 export const Feed: FC = () => {
   /** TODO: взять переменную из стора */

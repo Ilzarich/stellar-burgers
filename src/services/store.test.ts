@@ -1,7 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import store, { rootReducer, AppDispatch, RootState } from './store';
-import { setIngredient, setBun, removeIngredient } from './constructorSlice';
-import { fetchAllIngredients } from './ingredientsSlice';
+import {
+  setIngredient,
+  setBun,
+  removeIngredient
+} from './constructor/constructorSlice';
+import { fetchAllIngredients } from './ingredients/ingredientsSlice';
 
 type TestRootState = ReturnType<typeof rootReducer>;
 

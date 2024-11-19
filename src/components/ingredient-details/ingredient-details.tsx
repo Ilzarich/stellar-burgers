@@ -3,8 +3,8 @@ import { Preloader } from '../ui/preloader';
 import { IngredientDetailsUI } from '../ui/ingredient-details';
 import { useLocation, useParams } from 'react-router-dom';
 import { RootState, useDispatch, useSelector } from '../../services/store';
-import { selectorIngredients } from '../../services/constructorSlice';
-import { setSelectedIngredient } from '../../services/ingredientsSlice';
+import { selectorIngredients } from '../../services/constructor/constructorSlice';
+import { setSelectedIngredient } from '../../services/ingredients/ingredientsSlice';
 import { TIngredient } from '@utils-types';
 
 export const IngredientDetails: FC = () => {

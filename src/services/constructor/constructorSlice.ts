@@ -1,6 +1,6 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TConstructorIngredient } from '@utils-types';
-import { RootState } from './store';
+import { RootState } from '../store';
 
 interface ConstructorState {
   bun: TConstructorIngredient | null;
@@ -54,7 +54,7 @@ const constructorSlice = createSlice({
           state.ingredients[index]
         ];
       }
-      if (option === 'down' && index > 0) {
+      if (option === 'down' && index < state.ingredients.length - 1) {
         [state.ingredients[index], state.ingredients[index + 1]] = [
           state.ingredients[index + 1],
           state.ingredients[index]

@@ -14,8 +14,8 @@ import {
   PayloadAction
 } from '@reduxjs/toolkit';
 import { TUser } from '@utils-types';
-import { deleteCookie, getCookie, setCookie } from '../utils/cookie';
-import { RootState } from './store';
+import { deleteCookie, getCookie, setCookie } from '../../utils/cookie';
+import { RootState } from '../store';
 
 interface IUserState {
   success: boolean;

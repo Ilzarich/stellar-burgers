@@ -5,7 +5,7 @@ import {
   createSlice
 } from '@reduxjs/toolkit';
 import { getIngredientsApi } from '@api';
-import { RootState } from './store';
+import { RootState } from '../store';
 import { PayloadAction } from '@reduxjs/toolkit';
 
 interface IngredietnsState {
