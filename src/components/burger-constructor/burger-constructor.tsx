@@ -54,10 +54,10 @@ export const BurgerConstructor: FC = () => {
 
     const ingredientIds = getIngredientsIds();
     dispatch(fetchOrderRequest(ingredientIds));
-    dispatch(clearConstructor());
   };
   const closeOrderModal = () => {
     dispatch(resetOrderModal());
+    closeOrderModal();
   };
 
   const price = useMemo(

@@ -40,7 +40,7 @@ const App = () => {
   return (
     <div className={styles.app}>
       <AppHeader />
-      <Routes>
+      <Routes location={background || location}>
         <Route path='/' element={<ConstructorPage />} />
         <Route path='/feed' element={<Feed />} />
         <Route
@@ -94,25 +94,32 @@ const App = () => {
           <Route
             path='/feed/:number'
             element={
-              <Modal title='Order Info' onClose={() => navigate(-1)}>
+              <Modal
+                title='Информация о заказе'
+                onClose={() => navigate(location.pathname, { replace: true })}
+              >
                 <OrderInfo />
               </Modal>
             }
           />
-
           <Route
             path='/ingredients/:id'
             element={
-              <Modal title='Ingredient Details' onClose={() => navigate(-1)}>
+              <Modal
+                title='Детали ингредиента'
+                onClose={() => navigate(location.pathname, { replace: true })}
+              >
                 <IngredientDetails />
               </Modal>
             }
           />
-
           <Route
             path='/profile/orders/:number'
             element={
-              <Modal title='Order Info' onClose={() => navigate(-1)}>
+              <Modal
+                title='Информация о заказе'
+                onClose={() => navigate(location.pathname, { replace: true })}
+              >
                 <OrderInfo />
               </Modal>
             }

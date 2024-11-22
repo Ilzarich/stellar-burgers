@@ -2,11 +2,13 @@ import { getOrderByNumberApi, getOrdersApi, orderBurgerApi } from '@api';
 import {
   createAsyncThunk,
   createSelector,
-  createSlice
+  createSlice,
+  PayloadAction
 } from '@reduxjs/toolkit';
 import { TOrder } from '@utils-types';
 import { TNewOrderResponse } from '@api';
 import { RootState } from '../store';
+import { clearConstructor } from '../constructor/constructorSlice';
 
 interface IOrderSliceState {
   success: boolean;
@@ -52,6 +54,7 @@ export const fetchOrderRequest = createAsyncThunk<TNewOrderResponse, string[]>(
   async (data: string[], thunkAPI) => {
     try {
       const response = await orderBurgerApi(data);
+      thunkAPI.dispatch(clearConstructor());
       return response;
     } catch (error) {
       console.error('Ошибка при создании заказа', error);
