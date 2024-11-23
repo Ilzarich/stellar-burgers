@@ -80,14 +80,16 @@ export const checkUserAuth = createAsyncThunk(
   'user/checkUser',
   async (_, { dispatch }) => {
     if (getCookie('accessToken')) {
-      getUserApi()
-        .then((response) => {
-          dispatch(setUser(response.user));
-          dispatch(setCheckAuth(true));
-        })
-        .finally(() => {
-          dispatch(setCheckAuth(true));
-        });
+      try {
+        const response = await getUserApi();
+        dispatch(setUser(response.user));
+        dispatch(setCheckAuth(true));
+      } catch (error) {
+        console.error('Error during user authentication:', error);
+        dispatch(setCheckAuth(false));
+      } finally {
+        dispatch(setCheckAuth(true));
+      }
     } else {
       dispatch(setCheckAuth(true));
     }

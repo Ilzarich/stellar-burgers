@@ -42,7 +42,7 @@ export const BurgerConstructor: FC = () => {
       (ingredient) => ingredient._id
     );
 
-    return [bunId, ...ingredientsIds];
+    return [bunId, ...ingredientsIds, bunId];
   };
 
   const onOrderClick = () => {
@@ -57,7 +57,7 @@ export const BurgerConstructor: FC = () => {
   };
   const closeOrderModal = () => {
     dispatch(resetOrderModal());
-    closeOrderModal();
+    dispatch(clearConstructor());
   };
 
   const price = useMemo(
