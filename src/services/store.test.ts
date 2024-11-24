@@ -85,4 +85,10 @@ describe('Redux Store', () => {
 
     jest.restoreAllMocks();
   });
+
+  test('rootReducer корректно обрабатывает неизвестный экшен', () => {
+    const initialState = rootReducer(undefined, { type: 'UNKNOWN_ACTION' });
+    const newState = rootReducer(initialState, { type: 'UNKNOWN_ACTION' });
+    expect(newState).toEqual(initialState);
+  });
 });

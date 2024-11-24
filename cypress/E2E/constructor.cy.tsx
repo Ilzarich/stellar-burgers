@@ -20,6 +20,8 @@ describe('E2E тесты для страницы конструктора', () =
     it('Добавление булок и ингредиентов в заказ', () => {
       cy.wait('@getIngredients');
 
+      cy.get(burgerCollect).should('not.exist');
+
       cy.get(`${bun} > ${commonButtom}`).first().click();
       cy.get(`${main} > ${commonButtom}`).first().click();
       cy.get(`${sauce} > ${commonButtom}`).first().click();
@@ -87,6 +89,8 @@ describe('Тест создания заказа', () => {
   });
 
   it('Все этапы создания заказа', () => {
+    cy.get(burgerCollect).should('not.exist');
+
     cy.get(`${bun} > ${commonButtom}`).first().click();
     cy.get(`${main} > ${commonButtom}`).first().click();
     cy.get(`${sauce} > ${commonButtom}`).first().click();
@@ -96,12 +100,16 @@ describe('Тест создания заказа', () => {
     ).click();
 
     const orderModal = cy.get('#modals > div:first-child');
-    const orderNumber = orderModal.get('div:nth-child(2) > h2');
+    // const orderNumber = orderModal.get('div:nth-child(2) > h2');
 
-    orderNumber.contains(orderData.order.number);
+    // orderNumber.contains(orderData.order.number);
+
+    orderModal.get('div:nth-child(2) > h2').should(
+      'contain',
+      orderData.order.number
+    );
 
     orderModal.get('div:first-child > div:first-child > button > svg').click();
-
     cy.get('modal').should('not.exist');
 
     const burgerCunstructor = {

@@ -118,7 +118,19 @@ const App = () => {
             </div>
           }
         />
-        <Route path='/profile/orders/:number' element={<OrderInfo />} />
+        <Route
+          path='/profile/orders/:number'
+          element={
+            <div className={styles.detailsPageWrap}>
+              <p
+                className={`text text_type_digits-default ${styles.detailHeader}`}
+              >
+                #{orderNumber && orderNumber.padStart(6, '0')}
+              </p>
+              <OrderInfo />
+            </div>
+          }
+        />
         <Route path='*' element={<NotFound404 />} />
       </Routes>
       {background && (
