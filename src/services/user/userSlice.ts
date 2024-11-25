@@ -25,7 +25,7 @@ interface IUserState {
   error: string | null;
 }
 
-const initialState: IUserState = {
+export const initialState: IUserState = {
   success: false,
   isCheckAuth: false,
   user: null,

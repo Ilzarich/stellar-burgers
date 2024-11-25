@@ -6,6 +6,11 @@ import {
   removeIngredient
 } from './constructor/constructorSlice';
 import { fetchAllIngredients } from './ingredients/ingredientsSlice';
+import { initialState as ingredientsInitialState } from './ingredients/ingredientsSlice';
+import { initialState as constructorInitialState } from './constructor/constructorSlice';
+import { initialState as orderInitialState } from './order/orderSlice';
+import { initialState as userInitialState } from './user/userSlice';
+import { initialState as feedsInitialState } from './feed/feedSlice';
 
 type TestRootState = ReturnType<typeof rootReducer>;
 
@@ -86,9 +91,25 @@ describe('Redux Store', () => {
     jest.restoreAllMocks();
   });
 
-  test('rootReducer корректно обрабатывает неизвестный экшен', () => {
-    const initialState = rootReducer(undefined, { type: 'UNKNOWN_ACTION' });
-    const newState = rootReducer(initialState, { type: 'UNKNOWN_ACTION' });
-    expect(newState).toEqual(initialState);
+  describe('rootReducer', () => {
+    test('rootReducer возвращает корректное начальное состояние', () => {
+      const expectedInitialState = {
+        ingredientsSlice: ingredientsInitialState,
+        constructorSlice: constructorInitialState,
+        feedsSlice: feedsInitialState,
+        orderSlise: orderInitialState,
+        userSlice: userInitialState
+      };
+
+      const state = rootReducer(undefined, { type: 'UNKNOWN_ACTION' });
+
+      expect(state).toEqual(expectedInitialState);
+    });
+
+    test('rootReducer корректно обрабатывает неизвестный экшен', () => {
+      const initialState = rootReducer(undefined, { type: 'UNKNOWN_ACTION' });
+      const newState = rootReducer(initialState, { type: 'UNKNOWN_ACTION' });
+      expect(newState).toEqual(initialState);
+    });
   });
 });

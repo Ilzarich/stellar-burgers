@@ -19,7 +19,7 @@ interface IOrderSliceState {
   error: string | null;
 }
 
-const initialState: IOrderSliceState = {
+export const initialState: IOrderSliceState = {
   success: false,
   order: null,
   profileOrders: null,

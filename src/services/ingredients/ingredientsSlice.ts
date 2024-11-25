@@ -15,7 +15,7 @@ interface IngredietnsState {
   selectedIngredient: TIngredient | null; //для модалки
 }
 
-const initialState: IngredietnsState = {
+export const initialState: IngredietnsState = {
   items: [],
   status: 'idle',
   error: null,
