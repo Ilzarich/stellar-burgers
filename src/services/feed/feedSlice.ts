@@ -7,7 +7,7 @@ import {
 import { TFeedsResponse } from '@api';
 import { TOrder } from '@utils-types';
 import { PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from './store';
+import { RootState } from '../store';
 
 interface FeedsState {
   success: boolean;
@@ -18,7 +18,7 @@ interface FeedsState {
   error: string | null;
 }
 
-const initialState: FeedsState = {
+export const initialState: FeedsState = {
   success: false,
   orders: [],
   total: 0,

@@ -14,8 +14,8 @@ import {
   PayloadAction
 } from '@reduxjs/toolkit';
 import { TUser } from '@utils-types';
-import { deleteCookie, getCookie, setCookie } from '../utils/cookie';
-import { RootState } from './store';
+import { deleteCookie, getCookie, setCookie } from '../../utils/cookie';
+import { RootState } from '../store';
 
 interface IUserState {
   success: boolean;
@@ -25,7 +25,7 @@ interface IUserState {
   error: string | null;
 }
 
-const initialState: IUserState = {
+export const initialState: IUserState = {
   success: false,
   isCheckAuth: false,
   user: null,
@@ -80,14 +80,16 @@ export const checkUserAuth = createAsyncThunk(
   'user/checkUser',
   async (_, { dispatch }) => {
     if (getCookie('accessToken')) {
-      getUserApi()
-        .then((response) => {
-          dispatch(setUser(response.user));
-          dispatch(setCheckAuth(true));
-        })
-        .finally(() => {
-          dispatch(setCheckAuth(true));
-        });
+      try {
+        const response = await getUserApi();
+        dispatch(setUser(response.user));
+        dispatch(setCheckAuth(true));
+      } catch (error) {
+        console.error('Error during user authentication:', error);
+        dispatch(setCheckAuth(false));
+      } finally {
+        dispatch(setCheckAuth(true));
+      }
     } else {
       dispatch(setCheckAuth(true));
     }

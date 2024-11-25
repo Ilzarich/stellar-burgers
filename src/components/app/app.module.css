@@ -19,10 +19,14 @@
   background: #8585ad;
 }
 
-.detailPageWrap {
+.detailsPageWrap {
   margin: 120px auto;
 }
 
 .detailHeader {
+  text-align: center;
+}
+
+.number_element {
   text-align: center;
 }

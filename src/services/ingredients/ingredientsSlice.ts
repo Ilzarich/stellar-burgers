@@ -5,7 +5,7 @@ import {
   createSlice
 } from '@reduxjs/toolkit';
 import { getIngredientsApi } from '@api';
-import { RootState } from './store';
+import { RootState } from '../store';
 import { PayloadAction } from '@reduxjs/toolkit';
 
 interface IngredietnsState {
@@ -15,7 +15,7 @@ interface IngredietnsState {
   selectedIngredient: TIngredient | null; //для модалки
 }
 
-const initialState: IngredietnsState = {
+export const initialState: IngredietnsState = {
   items: [],
   status: 'idle',
   error: null,
